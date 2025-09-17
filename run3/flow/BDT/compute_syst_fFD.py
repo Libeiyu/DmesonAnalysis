@@ -3,7 +3,7 @@ import os
 import numpy as np
 import argparse
 import yaml
-from ROOT import TFile, TCanvas, kFullSquare, kBlack, kOrange, kAzure, kGray, kRed, TLegend, kCyan, kSpring, kGreen, kBlue, kMagenta, kFullCircle, TGraphErrors, TH1F
+from ROOT import TFile, TCanvas, kFullSquare, kBlack, kOrange, kAzure, kGray, kRed, TLegend, kCyan, kSpring, kGreen, kBlue, kMagenta, kFullCircle, TGraphErrors, TH1F, gROOT
 sys.path.append('../../../')
 from utils.StyleFormatter import SetGlobalStyle, SetObjectStyle
 
@@ -13,6 +13,7 @@ cols = [kBlack, kOrange+1, kAzure+4, kRed+1, kCyan+2, kGreen+2, kBlue-4, kMagent
 labels = ['default', 'random', 'even', 'odd', 'step1', 'step2', 'minus3low', 'minus3high', 'minus3']
 
 def get_hdeltav(href, hsyst):
+    gROOT.SetBatch(True)
     hdelta = hsyst.Clone()
     hdelta.Reset()
     hdelta.SetDirectory(0)
@@ -23,6 +24,7 @@ def get_hdeltav(href, hsyst):
     return hdelta
 
 def get_rms_shift(histsdeltav2):
+    gROOT.SetBatch(True)
     gsyst = TGraphErrors(-1)
     SetObjectStyle(gsyst, color=kAzure+2, fillcolor=kAzure+2, linewidth=0, fillalpha=0.2, linestyle=8, fillstyle=3154)
     for ibin in range(1, histsdeltav2[0].GetNbinsX()+1):
@@ -38,6 +40,7 @@ def get_rms_shift(histsdeltav2):
 
 
 def compute_syst(infiles, outputdir, suffix):
+    gROOT.SetBatch(True)
     #______________________________________________________________________________________
     # Collect all .root files
     hv2_prompt = []
@@ -149,6 +152,7 @@ def compute_syst(infiles, outputdir, suffix):
 
     #______________________________________________________________________________________
     # Save output
+    suffix = 'default'
     outputfile = os.path.join(outputdir, f'syst_fFD_{suffix}.root')
     outfile = TFile(outputfile, 'RECREATE')
     canv.Write()

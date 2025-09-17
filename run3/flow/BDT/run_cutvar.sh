@@ -14,9 +14,14 @@
 #- dov2vf (bool): perform v2 vs FD fraction
 #- domergeimages (bool): perform cutvar images merging
 #----------
+if [ $# -eq 0 ]; then
+    export config_flow="/home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/config/config_flow_evtsel.yml"
+fi
 
-export config_flow="/home/mdicosta/FlowDplus/FinalResults/templs_from_histo_parallel/config_3040_uncorrelated_templs_from_histo_parallel.yml"
-export usepreprocessed=True
+if [ $# -eq 1 ]; then
+	export config_flow=$1
+fi
+export usepreprocessed=False
 export docw=True
 export domy=True
 export doproj=True
@@ -25,7 +30,7 @@ export dovn=True
 export dofcv=False
 export doddf=False
 export dov2vf=False
-export domergeimages=False
+export domergeimages=True
 
 export usepreprocessed=$([ "$usepreprocessed" = "False" ] && echo "" || echo "--use_preprocessed")
 export calc_weights=$([ "$docw" = "False" ] && echo "" || echo "--do_calc_weights")

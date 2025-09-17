@@ -18,14 +18,14 @@ ptmins: [0.0,0.5,1.0,1.5]
 ptmaxs: [0.5,1.0,1.5,2.0]
 
 # centrality class
-centrality: 'k3040'
+centrality: 'k3050'
 # output directory for preprocessed files
 skim_out_dir: '/Users/mcosti/Analysis/Datasets/3050/skim3040bkgstrict'
-# bkg cuts, cut is applied then bkg axis is dropped
-bkg_cuts: [0.002, 0.002, 0.002, 0.006]
+# bkg cuts, cut is applied then bkg axis is dropped. -1 means no cut
+bkg_cuts: [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
 
 # var names of axes to keep + rebin factors
-axestokeep: ['Mass', 'sp', 'score_FD', 'Pt', 'cent']
+axestokeep: ['Mass', 'sp', 'score_bkg','score_FD', 'Pt', 'cent']
 RebinSparse:
        Mass: 2
        sp: 1

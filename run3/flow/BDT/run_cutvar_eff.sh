@@ -1,0 +1,56 @@
+#!/bin/bash
+
+#Parameters
+#----------
+# config_flow (str): path of directory with config files
+#- usepreprocessed (bool): use pre-processed input
+#- docw (bool): calculate pt weights
+#- domy (bool): produce yaml config files
+#- doproj (bool): project sparses (TODO: separate data and mc)
+#- doeff (bool): perform efficiency calculation
+#- dovn (bool): perform simultaneous fits
+#- dofcv (bool): perform fraction by cut variation
+#- doddf (bool): perform fraction by data-driven method
+#- dov2vf (bool): perform v2 vs FD fraction
+#- domergeimages (bool): perform cutvar images merging
+#----------
+if [ $# -eq 0 ]; then
+    export config_flow=""
+fi
+
+if [ $# -eq 1 ]; then
+	export config_flow=$1
+fi
+export usepreprocessed=False
+export docw=True
+export domy=True
+export doproj=True
+export doeff=True
+export dovn=False
+export dofcv=False
+export doddf=False
+export dov2vf=False
+export domergeimages=True
+
+export usepreprocessed=$([ "$usepreprocessed" = "False" ] && echo "" || echo "--use_preprocessed")
+export calc_weights=$([ "$docw" = "False" ] && echo "" || echo "--do_calc_weights")
+export make_yaml=$([ "$domy" = "False" ] && echo "" || echo "--do_make_yaml")
+export proj=$([ "$doproj" = "False" ] && echo "" || echo "--do_projections")
+export efficiency=$([ "$doeff" = "False" ] && echo "" || echo "--do_efficiency")
+export vn=$([ "$dovn" = "False" ] && echo "" || echo "--do_vn")
+export frac_cut_var=$([ "$dofcv" = "False" ] && echo "" || echo "--do_frac_cut_var")
+export data_driven_frac=$([ "$doddf" = "False" ] && echo "" || echo "--do_data_driven_frac")
+export v2_vs_frac=$([ "$dov2vf" = "False" ] && echo "" || echo "--do_v2_vs_frac")
+export merge_images=$([ "$domergeimages" = "False" ] && echo "" || echo "--do_merge_images")
+
+python3 run_cutvar.py $config_flow \
+					  $usepreprocessed \
+					  $calc_weights \
+					  $make_yaml \
+					  $proj \
+					  $efficiency \
+					  $vn \
+					  $frac_cut_var \
+					  $data_driven_frac \
+					  $v2_vs_frac \
+					  $merge_images

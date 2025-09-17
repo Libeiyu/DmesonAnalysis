@@ -348,6 +348,8 @@ def get_centrality_bins(centrality):
         return '70_80', [70, 80]
     elif centrality == 'k0100':
         return '0_100', [0, 100]
+    elif centrality == 'k5090':
+        return '50_90', [50, 90]
     else:
         print(f"ERROR: cent class \'{centrality}\' is not supported! Exit")
     sys.exit()

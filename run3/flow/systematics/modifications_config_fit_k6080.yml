@@ -1,0 +1,44 @@
+# using sample with a given bdt cut set below
+fit_options:
+  BkgFuncVn: ["kPol2", "kLin"]
+  BkgFunc: ["kPol2", "kExpo", "kPol3"]
+  Rebin: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11] # depends on the value of a given pt bin
+  inv_mass_bins: # automatically get the MassMin and MassMax values
+    steps: [0.01, 0.02]
+    MassMin: [1.65, 1.66, 1.68, 1.70, 1.72, 1.73,1.76,1.78] # depends on the value of a given pt bin
+    MassMax: [1.96,2.00, 2.02, 2.04, 2.06, 2.08, 2.10] # depends on the value of a given pt bin
+  use_inv_mass_bins: [true, false]
+
+  # FixSigma: -1: use the uncertainty from the sigma
+  # FixSigma: 0: do not fix the sigma
+  # FixSigma: 0.5: vary 50% the sigma
+  Sigma:
+    FixSigma: -1
+    FixSigmaFromFile: '/home/wuct/ALICE/local/Results/test/flow/systematics/pre/cutvar_central/ry/raw_yields_central_00.root'
+    med: [0.015335251813012114, 0.01655015067022147, 0.01865601988903462, 0.02093053755186224, 0.024355763936667423, 0.027098258495365492, 0.029110653254152637, 0.03279613990358041, 0.036016546647050236, 0.045224877754923384]
+    lower: [0.015254478768328403, 0.01649207341537452, 0.01857183479698645, 0.020808456735301836, 0.02417453591777618, 0.026842989344339218, 0.028726740855335574, 0.032304915820152574, 0.0352022973780103, 0.04420563759785744]
+    upper: [0.015416024857695824, 0.016608227925068424, 0.018740204981082788, 0.02105261836842264, 0.024536991955558668, 0.027353527646391766, 0.0294945656529697, 0.03328736398700824, 0.036830795916090175, 0.046244117911989326]
+
+
+
+
+# fit options for special D meson
+# Dzero
+Dzero:
+  RoverS: 0.5
+
+# Dplus
+Dplus:
+  IncludeKDETempls: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  FromGrid: false 
+  TemplsFlags: [2]  
+  TemplsInputs: ['/Users/mcosti/Analysis/Datasets/Templates/AO2D_325626.root']
+  TemplsTreeNames: ['O2hfcanddplite'] 
+  InitWeights: [[500], [500], [500], [500], [500], [500], [500], [500], [500], [500], [500], [500], [500], [500], [500]]
+  MinWeights: [[0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0],]
+  MaxWeights: [[1000], [1000], [1000], [1000], [1000], [1000], [1000], [1000], [1000], [1000], [1000], [1000], [1000], [1000], [1000]]
+  FixVnTemplToSgn: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  VnInitWeights: [[0.1], [0.1], [0.1], [0.1], [0.1], [0.1], [0.1], [0.1], [0.1], [0.1], [0.1], [0.1], [0.1], [0.1], [0.1]]
+  VnMinWeights: [[0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0], [0]]
+  VnMaxWeights: [[0.2], [0.2], [0.2], [0.2], [0.2], [0.2], [0.2], [0.2], [0.2], [0.2], [0.2], [0.2], [0.2], [0.2], [0.2]]
+  InitBkg: [[],[],[],[],[],[],[],[],[],[],[],[],[]]

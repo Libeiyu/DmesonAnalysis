@@ -55,7 +55,12 @@ def get_sparses(config, get_data, get_mc_reco, get_mc_gen, anres_files=[], prepr
                 'sp': 3,
                 'score_bkg': 4,
                 'score_FD': 5,
-                'occ': 6
+                'occ': 6,
+                'sel1': 7, #u noSameBunchPileup
+                'sel2': 8, #  occupancy
+                'sel3': 9, #  timerangenarrow
+                'sel4': 10, #  timerangestandard
+                'sel5': 11, #  rofstandard
             }
             # REVIEW: I would suggest to separete the config_flow and config_pre
             # and load the flow files from the arguments

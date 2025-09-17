@@ -54,7 +54,7 @@ def minimise_chi2(config, ptmins, ptmaxs, hRawYields, hEffPrompt, hEffFD, output
 
         for iCut, (hRaw, hEffP, hEffF) in enumerate(zip(hRawYields, hEffPrompt, hEffFD)):
             # if skip_cuts is defined check if the cut number is present for that pt
-            if 'skip_cuts' in config['minimisation'] and iPt < len(config['minimisation']['skip_cuts']):
+            if 'skip_cuts' in config['minimisation']:
                 if iCut in config['minimisation']['skip_cuts'][iPt]:
                     print(f'Skipping cut set {iCut} for pt {ptMin:.1f}-{ptMax:.1f}')
                     continue
@@ -390,7 +390,7 @@ def compute_frac_cut_var(config_flow, inputdir, outputdir, suffix, batch=False):
     latInfo.SetTextColor(1)
 
     minimise_chi2(config, ptmins, ptmaxs, hRawYields, hEffPrompt, hEffFD, outputdir, suffix, False)
-    if 'systematics' in config['minimisation']:
+    if 'systematics' in config['minimisation'] and config['minimisation']['correlated']:
         for syst in config['minimisation']['systematics']:
             print(f'Running systematics: {syst}')
             minimise_chi2(config, ptmins, ptmaxs, hRawYields, hEffPrompt, hEffFD, f'{outputdir}/Syst', syst, systematics=syst)

@@ -6,26 +6,26 @@
 ########################################
 
 # Default cut variation path (uncorrected)
-export cutvar_default="path/to/default/V2VsFrac"
+export cutvar_default="/home/wuct/ALICE/local/Results/test/flow/systematics/combined/cutvar_combine/V2VsFrac"
 
 # Array of systematic variation paths (e.g., for "random" and "even" variations)
 cutvar_systvariation_paths=(
-  "path/to/Syst/random"
-  "path/to/Syst/even"
-  "path/to/Syst/odd"
-  "path/to/Syst/1in4"
-  "path/to/Syst/1in3"
-  "path/to/Syst/minus3low"
-  "path/to/Syst/minus3high"
-  "path/to/Syst/minus3"
+  "/home/wuct/ALICE/local/Results/test/cutvar_fd/Syst/random"
+  "/home/wuct/ALICE/local/Results/test/cutvar_fd/Syst/even"
+  "/home/wuct/ALICE/local/Results/test/cutvar_fd/Syst/odd"
+  "/home/wuct/ALICE/local/Results/test/cutvar_fd/Syst/1in4"
+  "/home/wuct/ALICE/local/Results/test/cutvar_fd/Syst/1in3"
+  "/home/wuct/ALICE/local/Results/test/cutvar_fd/Syst/minus3low"
+  "/home/wuct/ALICE/local/Results/test/cutvar_fd/Syst/minus3high"
+  "/home/wuct/ALICE/local/Results/test/cutvar_fd/Syst/minus3"
 )
 
 # Other important paths
-export corrPath="path/to/correlated/folder"
-export uncorrPath="path/to/uncorr/fodler/"
-export output_dir="output/dir"  # Output directory for results
-export config="../config_flow.yml"
-export n_parallel=2  # Number of parallel jobs
+export corrPath="/home/wuct/ALICE/local/Results/test/flow/systematics/pre/cutvar_correlated"
+export uncorrPath="/home/wuct/ALICE/local/Results/test/flow/systematics/pre/cutvar_combine"
+export output_dir="/home/wuct/ALICE/local/Results/test/flow"  # Output directory for results
+export config="/home/wuct/ALICE/local/Results/test/flow/systematics/config_sys/config_default.yml"
+export n_parallel=10  # Number of parallel jobs
 
 ########################################
 # Parallel function to run analysis for each configuration
@@ -122,5 +122,6 @@ done
 # Disable recursive globbing if no longer needed
 shopt -u globstar
 
+cd ../BDT/ || { echo "Failed to change directory to ../BDT/"; exit 1; }
 echo "Running python3 compute_syst_fFD.py -s $cutvar_systvariation_paths -o $output_dir"
 python3 compute_syst_fFD.py ${all_v2_files[@]} -s $cutvar_systvariation_paths -o $output_dir

@@ -427,7 +427,13 @@ if __name__ == "__main__":
     if args.systematics and not args.proj_mc:
         sparsesFlow, sparsesReco, sparsesGen, axes = get_sparses(config, True, False, False, args.anres_dir, args.preprocessed, f'{config.get("skim_out_dir", "")}', args.systematics, iCut)
     else:
-        sparsesFlow, sparsesReco, sparsesGen, axes = get_sparses(config, True, True, True, args.anres_dir, args.preprocessed, f'{config.get("skim_out_dir", "")}', args.systematics, iCut)
+        print(f'{config.get("project_data")}')
+        print(f'{config["project_data"]}')
+        if "project_data" in config and config['project_data'] == False:
+            print('NOT PROJECTING DATA')
+            sparsesFlow, sparsesReco, sparsesGen, axes = get_sparses(config, False, True, True, args.anres_dir, args.preprocessed, f'{config.get("skim_out_dir", "")}', args.systematics, iCut)
+        else:
+            sparsesFlow, sparsesReco, sparsesGen, axes = get_sparses(config, True, True, True, args.anres_dir, args.preprocessed, f'{config.get("skim_out_dir", "")}', args.systematics, iCut)
     if not args.systematics:
         if not args.preprocessed:
             for key, iSparse in sparsesFlow.items():
@@ -441,6 +447,7 @@ if __name__ == "__main__":
     if args.proj_mc:
         ptWeights, ptWeightsB, Bspeciesweights, sPtWeights, sPtWeightsB = pt_weights_info(args.ptweights, args.ptweightsB)
 
+    occu_cuts = config['occu_cut']
     with alive_bar(len(cutVars['Pt']['min']), title='Processing pT bins') as bar:
         for iPt, (ptMin, ptMax) in enumerate(zip(cutVars['Pt']['min'], cutVars['Pt']['max'])):
             print(f'Projecting distributions for {ptMin:.1f} < pT < {ptMax:.1f} GeV/c')
@@ -449,22 +456,40 @@ if __name__ == "__main__":
             outfile.mkdir(f'cent_bins{cent}/pt_bins{ptMin}_{ptMax}')
             outfile.cd(f'cent_bins{cent}/pt_bins{ptMin}_{ptMax}')
     
-            print(f"sparsesFlow: {sparsesFlow}")
-            if args.preprocessed:
-                print('PREPROCESSED')
-                if not args.systematics:
-                    sparsesFlow[f"Flow_{ptLowLabel}_{ptHighLabel}"].GetAxis(axes['Flow']['score_FD']).SetRangeUser(cutVars['score_FD']['min'][iPt], cutVars['score_FD']['max'][iPt])
-                proj_data(sparsesFlow[f"Flow_{ptLowLabel}_{ptHighLabel}"], ptMin, ptMax, cent_min, cent_max, axes, config['inv_mass_bins'][iPt], reso, args.systematics)
-                outfile.cd(f'cent_bins{cent}/pt_bins{ptMin}_{ptMax}')
-                print(f"Projected data!")
-            
-            if not args.preprocessed:
-                print('NOT PREPROCESSED')
-                for iSparse, (key, sparse) in enumerate(sparsesFlow.items()):
-                    for iVar in cutVars:
-                        sparse.GetAxis(axes['Flow'][iVar]).SetRangeUser(cutVars[iVar]['min'][iPt], cutVars[iVar]['max'][iPt])
-                proj_data(sparsesFlow, ptMin, ptMax, cent_min, cent_max, axes, config['inv_mass_bins'][iPt], reso)
-                print(f"Projected data!")
+            if "project_data" in config and config['project_data'] == False:
+                print('NOT PROJECTING DATA')
+            else:
+                print(f"sparsesFlow: {sparsesFlow}")
+                if args.preprocessed:
+                    print('PREPROCESSED')
+                    if not args.systematics:
+                        sparsesFlow[f"Flow_{ptLowLabel}_{ptHighLabel}"].GetAxis(axes['Flow']['score_FD']).SetRangeUser(cutVars['score_FD']['min'][iPt], cutVars['score_FD']['max'][iPt])
+                    proj_data(sparsesFlow[f"Flow_{ptLowLabel}_{ptHighLabel}"], ptMin, ptMax, cent_min, cent_max, axes, config['inv_mass_bins'][iPt], reso, args.systematics)
+                    outfile.cd(f'cent_bins{cent}/pt_bins{ptMin}_{ptMax}')
+                    print(f"Projected data!")
+                
+                if not args.preprocessed:
+                    print('NOT PREPROCESSED')
+                    for iSparse, (key, sparse) in enumerate(sparsesFlow.items()):
+                        if iPt != iSparse:
+                            continue
+                        for iVar in cutVars:
+                            sparse.GetAxis(axes['Flow'][iVar]).SetRangeUser(cutVars[iVar]['min'][iPt], cutVars[iVar]['max'][iPt])
+                        # sparse.GetAxis(axes['Flow']['occ']).SetRange(occu_cuts[0], occu_cuts[1])
+                        if config['evtsel'] == 'all':
+                            for sel_key in axes['Flow']:
+                                if 'sel' in sel_key:
+                                    sparse.GetAxis(axes['Flow'][sel_key]).SetRange(1, 1)
+                                    occu_histo = sparse.Projection(axes['Flow'][sel_key])
+                                    occu_histo.SetName(f'occu_histo_{iSparse}_{sel_key}')
+                                    occu_histo.SetDirectory(0)
+                                    occu_histo.Write()
+                        elif 'sel' in config['evtsel']:
+                            sparse.GetAxis(axes['Flow'][config['evtsel']]).SetRange(1, 1)
+                        else:
+                            continue
+                        proj_data(sparse, ptMin, ptMax, cent_min, cent_max, axes, config['inv_mass_bins'][iPt], reso)
+                    print(f"Projected data!")
             
             if args.systematics and not args.proj_mc:
                 mc_histos, mc_histos_names = [], []
@@ -491,9 +516,11 @@ if __name__ == "__main__":
             else:
                 for iVar in cutVars:
                     for key, iSparse in sparsesReco.items():
+                        iSparse.GetAxis(axes['RecoPrompt']['occ']).SetRange(occu_cuts[0], occu_cuts[1])
                         iSparse.GetAxis(axes[key][iVar]).SetRangeUser(cutVars[iVar]['min'][iPt], cutVars[iVar]['max'][iPt])
                     if iVar == 'Pt':
                         for key, iSparse in sparsesGen.items():
+                            iSparse.GetAxis(axes['GenFD']['occ']).SetRange(occu_cuts[0], occu_cuts[1])
                             iSparse.GetAxis(axes[key][iVar]).SetRangeUser(cutVars[iVar]['min'][iPt], cutVars[iVar]['max'][iPt])
                     if iVar == 'score_FD' or iVar == 'score_bkg':
                         print(f'{iVar}: {cutVars[iVar]["min"][iPt]} < {iVar} < {cutVars[iVar]["max"][iPt]}')

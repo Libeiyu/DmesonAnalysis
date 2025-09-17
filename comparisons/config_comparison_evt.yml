@@ -1,0 +1,105 @@
+inputs:
+    dirname: null # leave null if not common for all input files
+    # filenames: [
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights_pass4/eff/eff_pt_weights_pass4_00.root,
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights_pass4/eff/eff_pt_weights_pass4_00.root,
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights/eff/eff_pt_weights_00.root,
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights/eff/eff_pt_weights_00.root
+    #             ]
+    # objectnames: [hEffPrompt, hEffFD, hEffPrompt, hEffFD] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+    # filenames: [
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/correlated_pass3/V2VsPt.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/correlated_pass4/V2VsPt.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/uncorrelated/V2VsPt.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/uncorrelated_pass4/V2VsPt.root,
+    # ]
+    # objectnames: [hv2Prompt, hv2Prompt, hv2Prompt, hv2Prompt] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+    # filenames: [
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/pre/rawyield/RawYields_D0_PbPb_0_Sigma.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/pre/sigma/sp/ry/raw_yieldssigma.root
+    # ]
+    # objectnames: [hRawYields, hRawYieldsSimFit] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+    filenames: [
+        /home/wuct/ALICE/local/RTools/RTools/test/Graph/Distributions/evtEvtDistribution_2023.root,
+        /home/wuct/ALICE/local/RTools/RTools/test/Graph/Distributions/evtEvtDistribution.root
+    ]
+
+    objectnames: [hEvtDistribution, hEvtDistribution, hV2VsPtPrompt, hV2VsPtPrompt] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+output: 
+    filename: /home/wuct/ALICE/local/RTools/RTools/test/Graph/Distributions/evt/2324 # with path and w/o extension
+    extensions: [pdf, root] # possibilities: pdf, eps, png, root
+
+options:
+    ROOTobject: [TH1, TH1, TH1, TGraph, TH1, TH1, TH1, TH1, TH1] # TH1 or TGraph: no need to specify TH1F, TH1D or TGraphErrors, TGraphAsymmErrors
+    scale: [1., 1., 1., 1., 1., 1., 1., 1., 1.]
+    lambdaParams: [1., 1., 1., 1., 1., 1., 1., 1., 1.] # counts -> (counts - 1) * lambda + 1
+    normalize: [false, false, false, false, false, false, false, false, false] # divide histogram by its area
+    colors: [kBlack, kRed+1, kAzure+47, kOrange+7, kBlack, kBlack, kRed+1, kRed+1, kAzure+4, kGreen+2, kOrange+7, kMagenta+1, kBlue, kCyan+3, kSpring-5]
+    markers: [kFullCircle, kFullCircle, kFullCircle, kFullCircle, kFullCircle, kFullCircle, kFullCircle, kFullCircle, kFullCircle]
+    markersize: 1.5
+    linewidth: 3
+    fillstyle: [1,1,1,1]
+    fillalpha: [1,1,1,1]
+    drawopt: [lp, lp, lp, lp, e, e, e, e, e]
+    
+    ratio: 
+        enable: true
+        uncertainties:
+            enable: true
+            corr: false
+        displayRMS: false
+        multiRatio: false
+        indexNumerator: [0, 2]
+        indexDenominator: [1, 3]
+
+    errcomp: # comparison of uncertainties
+        enable: false
+        relative: false
+    uncertainty: 
+        enable: true
+
+    legend:
+        avoid: false #set true to avoid the legend in the final plot
+        xlimits: [0.2, 0.9]
+        ylimits: [0.6, 0.9]
+        header: null
+        # titles: [prompt pass4, fd pass4, prompt pass3, fd pass3]
+        # titles: [corr. pass3, corr. pass4, uncorr. pass3, uncorr. pass4]
+        # titles: [raw yield, raw yield sim. fit]
+        # titles: [corr. strategy, uncorr. strategy, combined strategy]
+        # titles: [k30-50%, k30-40%, k40-50%, Prel. 3050%]
+        titles: ['2023 pass4', '2024 pass1', '2024 pass1 data and 2023 pass4 mc']
+        options: [lp, lp, lp, lp, lp, lp, lp, lp, lp]
+        textsize: 0.035
+        ncolumns: 1
+
+    text:
+        x: [0.5, 0.8]
+        y: [0.8, 0.9]
+        text: ""
+        textsize: 0.03
+        textfont: 42
+        textalign: 12
+
+    canvas:
+        width: 2160
+        heigth: 1080
+        xaxistitle: 'Centrality (%)'
+        # yaxistitle: 'Efficiency (w. ptWeights)'
+        yaxistitle: 'Event'
+        # yaxistitle: 'Raw yield'
+        xlimits: [0., 100]
+        ylimits: [1, 100000000]
+        ylimitsratio: [0.2, 1.8]
+        ylimitserr: [0., 0.35]
+        logy: false
+        logx: false
+        ratio:
+            logy: false
+            logx: false
+        errcomp:
+            logy: false
+            logx: false  

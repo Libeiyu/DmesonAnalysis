@@ -16,28 +16,21 @@
 
 # resutls will be saved in ${workdir}/Results/${dataCent}/${centrality}/${size}/
 scriptdir=$(dirname $0)
-workdir=path/to/DmesonAnalysis/run3/flow/
-config=path/to/config_flow.yml
+workdir=/home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/reso
+config=/home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/config/config_flow_RESO.yml
 
-centrality=k3050 # k020 k3050 k6080  <-----------------------------------------------------------------------------------------------
-dataCent=2060 # 020 2050 50100   <---------------------------------------------------------------------------------------------------
+centrality=k6080 # k020 k3050 k6080  <-----------------------------------------------------------------------------------------------
+dataCent=0100 # 020 2050 50100   <---------------------------------------------------------------------------------------------------
 size=large # small medium large <-------------------------------------------------------------------------------------------------------
 vn_method=sp # sp ep deltaphi   <---------------------------------------------------------------------------------------------------
 qvec= # full recenter   <-------------------------------------------------------------------------------------------------------
-debug= #_old #_new #_tot
+debug=ini_occu #_old #_new #_tot
 
 wagon_id= # 13649 14351 13650 14352    <---------------------------------------------------------------------------------------
-doReso=false # false true    <-------------------------------------------------------------------------------------------------------
+doReso=true # false true    <-------------------------------------------------------------------------------------------------------
 doProj=false # false true
 
-an_res_file="path/to/AnRes_0.root \
-path/to/AnRes_1.root \
-path/to/AnRes_2.root \
-path/to/AnRes_3.root \
-path/to/AnRes_4.root \
-path/to/AnRes_5.root \
-path/to/AnRes_6.root \
-path/to/AnRes_7.root
+an_res_file="/home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/reso/k3050/third/proj_reso_3_occupancy.root
 "
 
 resolution=path/to/resolution.root
@@ -66,6 +59,7 @@ fi
 
 # output dir.
 outputdir=${workdir}/Results/${dataCent}/${centrality}/${size}/
+echo "Output directory: ${outputdir}"
 if [ ! -d "${outputdir}" ]; then mkdir -p ${outputdir}; fi
 
     python3 ${scriptdir}/run_full_flow_analysis.py \

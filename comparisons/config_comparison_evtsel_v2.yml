@@ -1,0 +1,87 @@
+inputs:
+    dirname: null # leave null if not common for all input files
+    filenames: [
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/Results/cutvar_int_occu/ry/raw_yields_int_occu_00.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/Results/cutvar_all_evtsel/ry/raw_yields_all_evtsel_00.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/Results/cutvar_sel1_evtsel/ry/raw_yields_sel1_evtsel_00.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/Results/cutvar_sel2_evtsel/ry/raw_yields_sel2_evtsel_00.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/Results/cutvar_sel3_evtsel/ry/raw_yields_sel3_evtsel_00.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/Results/cutvar_sel4_evtsel/ry/raw_yields_sel4_evtsel_00.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/Results/cutvar_sel5_evtsel/ry/raw_yields_sel5_evtsel_00.root
+    ]
+
+    objectnames: [hvnSimFit, hvnSimFit, hvnSimFit, hvnSimFit, hvnSimFit, hvnSimFit, hvnSimFit, hEffFD] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+output: 
+    filename: /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/reso/Results/0100/k0100/large/sp/v2_occupancy # with path and w/o extension
+    extensions: [pdf, root] # possibilities: pdf, eps, png, root
+
+options:
+    ROOTobject: [TH1, TH1, TH1, TH1, TH1, TH1, TH1, TH1, TH1] # TH1 or TGraph: no need to specify TH1F, TH1D or TGraphErrors, TGraphAsymmErrors
+    scale: [1., 1., 1., 1., 1., 1., 1., 1., 1.]
+    lambdaParams: [1., 1., 1., 1., 1., 1., 1., 1., 1.] # counts -> (counts - 1) * lambda + 1
+    normalize: [false, false, false, false, false, false, false, false, false] # divide histogram by its area
+    colors: [kBlack, kRed+1, kAzure+4, kGreen+2, kOrange+7, kMagenta+1, kBlue, kCyan+3, kSpring-5]
+    markers: [kFullCircle, kFullCircle, kOpenCircle, kOpenCircle, kOpenCircle, kOpenCircle, kOpenCircle, kOpenCircle, kOpenCircle, kOpenCircle, kFullSquare, kFullSquare, kFullSquare, kFullSquare, kFullSquare]
+    markersize: 1
+    linewidth: 2
+    fillstyle: [1,1,1,1,1,1,1,1,1]
+    fillalpha: [1,1,1,1,1,1,1,1,1]
+    drawopt: [p, p, p, p, p, p, p, p, p]
+    
+    ratio: 
+        enable: true
+        uncertainties:
+            enable: false
+            corr: false
+        displayRMS: false
+        multiRatio: false
+        indexNumerator: [0, 2]
+        indexDenominator: [1, 3]
+
+    errcomp: # comparison of uncertainties
+        enable: false
+        relative: false
+    uncertainty: 
+        enable: true
+
+    legend:
+        avoid: false #set true to avoid the legend in the final plot
+        xlimits: [0.2, 0.9]
+        ylimits: [0.8, 0.9]
+        header: null
+        # titles: [prompt pass4, fd pass4, prompt pass3, fd pass3]
+        titles: [w/o sel, all sels,sel1, sel2, sel3, sel4, sel5]
+        # titles: [raw yield, raw yield sim. fit]
+        # titles: [corr. strategy, uncorr. strategy, combined strategy]
+        options: [lp, lp, lp, lp, lp, lp, lp, lp, lp]
+        textsize: 0.035
+        ncolumns: 2
+
+    text:
+        x: [0.6, 0.8]
+        y: [0.6, 0.9]
+        text: ""
+        textsize: 0.04
+        textfont: 42
+        textalign: 12
+
+    canvas:
+        width: 2190
+        heigth: 1080
+        xaxistitle: '#it{p}_{T} (GeV/#it{c})'
+        # yaxistitle: "#it{R}_{2} {SP}"
+        yaxistitle: 'Inclusive D^{0} v_{2}'
+        # yaxistitle: 'Raw yield'
+        xlimits: [0.4, 26]
+        ylimits: [-0.1, 0.3]
+        ylimitsratio: [0., 2.1]
+        ylimitserr: [0., 0.35]
+        logy: false
+        logx: true
+        ratio:
+            logy: false
+            logx: false
+        errcomp:
+            logy: false
+            logx: false  

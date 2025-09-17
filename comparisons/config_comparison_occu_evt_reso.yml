@@ -1,0 +1,123 @@
+inputs:
+    dirname: null # leave null if not common for all input files
+    filenames: [
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/reso/Resultsresospproj_reso_3_occupancy.root.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/reso/Resultsresospproj_reso_3_all_occupancy.root.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/reso/Resultsresospproj_reso_3_sel1_occupancy.root.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/reso/Resultsresospproj_reso_3_sel2_occupancy.root.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/reso/Resultsresospproj_reso_3_sel3_occupancy.root.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/reso/Resultsresospproj_reso_3_sel4_occupancy.root.root,
+        /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/reso/Resultsresospproj_reso_3_sel5_occupancy.root.root
+    ]
+
+    objectnames: [FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso_delta_cent
+
+    ] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+output: 
+    filename: /home/wuct/ALICE/local/reso/DmesonAnalysis/run3/flow/reso/Results/resolution # with path and w/o extension
+    extensions: [pdf, root] # possibilities: pdf, eps, png, root
+
+options:
+    ROOTobject: TH1 # TH1 or TGraph: no need to specify TH1F, TH1D or TGraphErrors, TGraphAsymmErrors
+    scale: 1. #[1., 1., 1., 1., 1., 1., 1., 1., 1.]
+    lambdaParams: 1. #[1., 1., 1., 1., 1., 1., 1., 1., 1.] # counts -> (counts - 1) * lambda + 1
+    normalize: false #[false, false, false, false, false, false, false, false, false] # divide histogram by its area
+    colors: [
+        kBlack, kRed+1, kAzure+4, kGreen+2, kOrange+7,kOrange+7, kMagenta+1, kBlue, kCyan+3, kSpring-5,
+        kRed+1, kRed+2, kRed+3, kRed+4, kRed+5, kRed+6,
+        kAzure+2, kAzure+3, kAzure+4, kAzure+5, kAzure+6, kAzure+7,
+        kGreen+3, kGreen+4, kGreen+5, kGreen+6, kGreen+7, kGreen+8
+    ]
+    #kBlack, kRed+1, kAzure+4, kGreen+2, kOrange+7,kBlack, kRed+1,  kRed+1, kAzure+47,kAzure+47, kOrange+7,   kOrange+7, kBlack, kBlack, kRed+1, kRed+1, kAzure+4, kGreen+2, kOrange+7, kMagenta+1, kBlue, kCyan+3, kSpring-5]
+    markers: kFullCircle # [kFullSquare, kFullCircle, kFullCircle, kFullCircle, kFullCircle, kOpenSquare, kFullCircle, kOpenSquare, kFullCircle, kFullCircle, kFullSquare, kFullSquare, kFullSquare, kFullSquare, kFullSquare]
+    markersize: 1
+    linewidth: 2
+    fillstyle: 1 #[1,1,1,1,1,1,1,1,1]
+    fillalpha: 1 #[1,1,1,1,1,1,1,1,1]
+    drawopt: b #[b, b, b, b, l, l, l, l, p]
+    
+    ratio: 
+        enable: true
+        uncertainties:
+            enable: false
+            corr: false
+        displayRMS: false
+        multiRatio: false
+        indexNumerator: [0, 2]
+        indexDenominator: [1, 3]
+
+    errcomp: # comparison of uncertainties
+        enable: false
+        relative: false
+    uncertainty: 
+        enable: false
+
+    legend:
+        avoid: false #set true to avoid the legend in the final plot
+        xlimits: [0.2, 0.9]
+        ylimits: [0.5, 0.9]
+        header: null
+        # titles: [prompt pass4, fd pass4, prompt pass3, fd pass3]
+        titles: [
+            "Reso w/o sel", "Reso w. All", "Reso w. Sel1", "Reso w. Sel2", "Reso w. Sel3", "Reso w. Sel4", "Reso w. Sel5"
+        ]
+        options: [l, l , l , l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l]
+        textsize: 0.035
+        ncolumns: 2
+
+    text:
+        x: [0.6, 0.8]
+        y: [0.6, 0.9]
+        text: ""
+        textsize: 0.04
+        textfont: 42
+        textalign: 12
+
+    canvas:
+        width: 2080
+        heigth: 1080
+        xaxistitle: "centrality (%)"
+        yaxistitle: "#it{R}_{2} {SP}"
+        # yaxistitle: 'Inclusive D^{0} v_{2}'
+        # yaxistitle: 'Raw yield'
+        xlimits: [30, 50]
+        ylimits: [0., 1.]
+        ylimitsratio: [0., 2.1]
+        ylimitserr: [0., 0.35]
+        logy: false
+        logx: false
+        ratio:
+            logy: false
+            logx: false
+        errcomp:
+            logy: false
+            logx: false  

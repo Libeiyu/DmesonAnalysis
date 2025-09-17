@@ -2,7 +2,7 @@ import sys
 import os
 import numpy as np
 import argparse
-from ROOT import TFile, TCanvas, TH1F, TGraphAsymmErrors, TLegend, kOrange, kAzure, kBlack
+from ROOT import TFile, TCanvas, TH1F, TGraphAsymmErrors, TLegend, kOrange, kAzure, kBlack, TPad
 sys.path.append('../../../')
 from utils.StyleFormatter import SetObjectStyle, SetGlobalStyle
 
@@ -140,7 +140,7 @@ def compute_systematics(outputdir, gvn_vs_mass_default, gvn_vs_mass, hchi2, hsig
                 print(f'No ry file found for trial {j}: {trails[j].trail_path}')
                 continue
             # Skip chi2 higher than 5 and significance lower than 3
-            if (chi2 > 4 and chi2 != 0) or (significance < 6 or significance > 600):
+            if (chi2 > 3 and chi2 != 0) or (significance < 6 or significance > 600):
                 print(f'Skipping trial {j}: {trails[j].ryfiles[iFile]} for pt bin {ipt} with chi2 = {chi2} and significance = {significance}')
                 continue
             hchi2_vs_trial[-1].SetBinContent(j, chi2)
@@ -279,7 +279,7 @@ def compute_systematics_prompt(outputdir, default_trail, trails):
                 significance = trails[j].hsignificances[iFile].GetBinContent(ipt)
                 chi2 = trails[j].hchi2s[iFile].GetBinContent(ipt)
 
-                if (chi2 > 5 and chi2 != 0) or (significance < 6 or significance > 600):
+                if (chi2 > 3 and chi2 != 0) or (significance < 6 or significance > 600):
                     print(f'Skipping trial {j}: {trails[j].ryfiles[iFile]} for pt bin {ipt} with chi2 = {chi2} and significance = {significance}')
                     skip_trial = True
                     break

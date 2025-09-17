@@ -1,0 +1,130 @@
+#!/bin/bash
+
+#Parameters
+#----------
+#- config (str): path of directory with config files
+#- an_res_file (str): path of directory with analysis results
+#- centrality (str): centrality class
+#- resolution (str/int): resolution file or resolution value
+#- outputdir (str): output directory
+#- suffix (str): suffix for output files
+#- vn_method (str): vn technique (sp, ep, deltaphi)
+#- skip_calc_weights (bool): skip calculation of weights
+#- skip_make_yaml (bool): skip make yaml
+#- skip_cut_variation (bool): skip cut variation
+#- skip_proj_mc (bool): skip projection for MC
+#- skip_efficiency (bool): skip efficiency
+#- skip_vn (bool): skip vn extraction
+#- skip_frac_cut_var (bool): skip fraction by cut variation
+#- skip_data_driven_frac (bool): skip fraction by data-driven method
+#- skip_v2_vs_frac (bool): skip v2 vs FD fraction
+#----------
+export config_flow="/home/wuct/ALICE/local/DmesonAnalysis/run3/flow/config/config_flow_D0_3050_mother.yml"
+export anres_dir="/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_5_10.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_10_15.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_15_20.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_20_25.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_25_30.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_30_35.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_35_40.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_40_50.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_50_60.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_60_70.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_70_80.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_80_100.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_100_120.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_120_160.root \
+/home/wuct/ALICE/local/Results/pre/pre_k3050/AnRes/AnalysisResults_pt_160_240.root"
+export output_dir="/home/wuct/ALICE/local/Results/test/sys" # full/corrected full/uncorrected
+export cent="k3050"
+export vn_method="sp"
+export res_file="/media/wuct/wulby/ALICE/AnRes/resolution/output_reso/resosp3050l_PASS4_full_PbPb_Reso.root"
+export suffix="sys" # _ will be added automatically
+
+export use_prep=False # True or False (use pre-processed inputs for projections)
+export spw=False # True or False (skip calculation of weights)
+export smy=False # True or False (skip make yaml)
+export spm=False # True or False (skip projection for MC)
+export seff=False # True or False (skip efficiency)
+export svn=True # True or False (skip vn extraction)
+export sfcv=True # True or False (skip fraction by cut variation)
+export sddf=True # True or False (skip fraction by data-driven method)
+export sv2vf=True # True or False (skip v2 vs fraction)
+
+# Setup logging
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+mkdir -p "${output_dir}/cutvar_${suffix}/logs"
+LOG_FILE="${output_dir}/cutvar_${suffix}/logs/log_${TIMESTAMP}.log"
+exec > >(tee -a "${LOG_FILE}") 2>&1
+
+echo "Starting run_cutvar.sh at $(date)"
+echo "Logging to: ${LOG_FILE}"
+
+if [ $use_prep = False ]; then
+	export use_preprocessed=""
+else
+	export use_preprocessed="--preprocessed"
+fi
+
+if [ $spw = False ]; then
+	export skip_calc_weights=""
+else
+	export skip_calc_weights="--skip_calc_weights"
+fi
+
+if [ $smy = False ]; then
+	export skip_make_yaml=""
+else
+	export skip_make_yaml="--skip_make_yaml"
+fi
+
+if [ $spm = False ]; then
+	export skip_proj_mc=""
+else
+	export skip_proj_mc="--skip_proj_mc"
+fi
+
+if [ $seff = False ]; then
+	export skip_efficiency=""
+else
+	export skip_efficiency="--skip_efficiency"
+fi
+
+if [ $svn = False ]; then
+	export skip_vn=""
+else
+	export skip_vn="--skip_vn"
+fi
+
+if [ $sfcv = False ]; then
+	export skip_frac_cut_var=""
+else
+	export skip_frac_cut_var="--skip_frac_cut_var"
+fi
+
+if [ $sddf = False ]; then
+	export skip_data_driven_frac=""
+else
+	export skip_data_driven_frac="--skip_data_driven_frac"
+fi
+
+if [ $sv2vf = False ]; then
+	export skip_v2_vs_frac=""
+else
+	export skip_v2_vs_frac="--skip_v2_vs_frac"
+fi
+
+python3 run_cutvar.py $config_flow $anres_dir -c $cent -r $res_file -o $output_dir -s $suffix -vn $vn_method $use_preprocessed \
+						$skip_calc_weights \
+						$skip_make_yaml \
+						$skip_proj_mc \
+						$skip_efficiency \
+						$skip_vn \
+						$skip_frac_cut_var \
+						$skip_data_driven_frac \
+						$skip_v2_vs_frac
+
+echo "Completed run_cutvar.sh at $(date)"
+echo "Log saved to: ${LOG_FILE}"
+
+python3 /home/wuct/ALICE/local/DmesonAnalysis/run3/tool/clean_logs.py $LOG_FILE

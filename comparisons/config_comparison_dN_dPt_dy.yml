@@ -1,0 +1,122 @@
+inputs:
+    dirname: null # leave null if not common for all input files
+    # filenames: [
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights_pass4/eff/eff_pt_weights_pass4_00.root,
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights_pass4/eff/eff_pt_weights_pass4_00.root,
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights/eff/eff_pt_weights_00.root,
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights/eff/eff_pt_weights_00.root
+    #             ]
+    # objectnames: [hEffPrompt, hEffFD, hEffPrompt, hEffFD] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+    # filenames: [
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/correlated_pass3/V2VsPt.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/correlated_pass4/V2VsPt.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/uncorrelated/V2VsPt.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/uncorrelated_pass4/V2VsPt.root,
+    # ]
+    # objectnames: [hv2Prompt, hv2Prompt, hv2Prompt, hv2Prompt] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+    # filenames: [
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/pre/rawyield/RawYields_D0_PbPb_0_Sigma.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/pre/sigma/sp/ry/raw_yieldssigma.root
+    # ]
+    # objectnames: [hRawYields, hRawYieldsSimFit] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+    filenames: [
+        /media/wuct/wulby/ALICE/AnRes/D0_production/prompt_D0_Nc_rebin.root,
+        # /media/wuct/wulby/ALICE/AnRes/D0_production/dN_dy_dpt_pass4_default.root,
+        # /media/wuct/wulby/ALICE/AnRes/D0_production/dN_dy_dpt_pass4_ptsmearing1p5.root,
+        /media/wuct/wulby/ALICE/AnRes/D0_production/dN_dy_dpt_pass4_ptsmearing1p5_vsphi.root,
+        /media/wuct/wulby/ALICE/AnRes/D0_production/dN_dy_dpt_pass4_ptsmearing1p5_vsphi_24.root
+    ]
+
+    objectnames: [prompt_D0_Nc, dNc_run3, dNc_run3, dNc_run3, dNc_run3] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+output: 
+    filename: /home/wuct/ALICE/local/Results/BDT/k3050/third/syst/pre_sys/dN_prompt_pass4_new_tracktuner_24 # with path and w/o extension
+    extensions: [pdf, root, png] # possibilities: pdf, eps, png, root
+
+#     filenames: [
+#         /media/wuct/wulby/ALICE/AnRes/D0_production/non_prompt_D0_Nb_rebin.root,
+#         /media/wuct/wulby/ALICE/AnRes/D0_production/dN_dy_dpt_uncorr_pass3_widerpT.root,
+#         /media/wuct/wulby/ALICE/AnRes/D0_production/dN_dy_dpt_corr_pass3_widerpT.root,
+#         /media/wuct/wulby/ALICE/AnRes/D0_production/dN_dy_dpt_uncorr_pass4_widerpT.root,
+#         /media/wuct/wulby/ALICE/AnRes/D0_production/dN_dy_dpt_corr_pass4_widerpT.root
+#     ]
+
+#     objectnames: [non_prompt_D0_Nb, dNb_run3, dNb_run3, dNb_run3, dNb_run3] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+# output: 
+#     filename: /home/wuct/ALICE/local/Results/BDT/k3050/third/syst/pre_sys/dN_nonprompt_widepT # with path and w/o extension
+#     extensions: [pdf, root, png] # possibilities: pdf, eps, png, root
+
+options:
+    ROOTobject: [TH1, TH1, TH1, TH1, TH1, TH1, TH1, TH1, TH1] # TH1 or TGraph: no need to specify TH1F, TH1D or TGraphErrors, TGraphAsymmErrors
+    scale: [1., 1., 1., 1., 1., 1., 1., 1., 1.]
+    lambdaParams: [1., 1., 1., 1., 1., 1., 1., 1., 1.] # counts -> (counts - 1) * lambda + 1
+    normalize: [false, false, false, false, false, false, false, false, false] # divide histogram by its area
+    colors: [kBlack, kRed+1, kAzure+47,kAzure+47, kOrange+7, kMagenta+1, kBlue, kRed+1, kRed+1, kAzure+4, kGreen+2, kOrange+7, kMagenta+1, kBlue, kCyan+3, kSpring-5]
+    markers: [kFullCircle, kFullCircle, kFullCircle, kOpenSquare, kFullCircle, kFullCircle, kFullCircle, kFullCircle, kFullCircle] # 
+    markersize: 1.2
+    linewidth: 3
+    fillstyle: [1,1,1,1,1,1,1,1,1]
+    fillalpha: [1,1,1,1,1,1,1,1,1]
+    drawopt: [p, p, p, p, p, p, e, e, e]
+    
+    ratio: 
+        enable: true
+        uncertainties:
+            enable: true
+            corr: false
+        displayRMS: false
+        multiRatio: false
+        indexNumerator: [0, 2]
+        indexDenominator: [1, 3]
+
+    errcomp: # comparison of uncertainties
+        enable: false
+        relative: false
+    uncertainty: 
+        enable: true
+
+    legend:
+        avoid: false #set true to avoid the legend in the final plot
+        xlimits: [0.5, 0.9]
+        ylimits: [0.6, 0.9]
+        header: null
+        # titles: [prompt pass4, fd pass4, prompt pass3, fd pass3]
+        # titles: [corr. pass3, corr. pass4, uncorr. pass3, uncorr. pass4]
+        # titles: [raw yield, raw yield sim. fit]
+        # titles: [corr. strategy, uncorr. strategy, combined strategy]
+        # titles: [k30-50%, k30-40%, k40-50%, Prel. 3050%]
+        titles: ['Run2, JHEP 12 (2022) 126 (|y|<0.5)', '2023 pass4 (|y|<0.8)', '2024 pass1(|y|<0.8)', 'Run3 pass4 ptSmearing1.5 phi(|y|<0.8)']
+        options: [lp, lp, lp, lp, lp, lp, lp, lp, lp]
+        textsize: 0.035
+        ncolumns: 1
+
+    text:
+        x: [0.2, 0.8]
+        y: [0.88, 0.95]
+        text: "Prompt D^{0}, 30-50%, TT w/ ptSmearing1.5+phi"
+        textsize: 0.03
+        textfont: 42
+        textalign: 12
+
+    canvas:
+        width: 2160 #2160
+        heigth: 1080
+        xaxistitle: '#it{p}_{T} (GeV/#it{c})'
+        # yaxistitle: 'Efficiency (w. ptWeights)'
+        yaxistitle: 'dN/dp_{T}/d#it{y} (Stat.) (GeV/#it{c})^{-1}'
+        # yaxistitle: 'Raw yield'
+        xlimits: [0.1, 18]
+        ylimits: [0.00001, 0.9]
+        ylimitsratio: [0.2, 1.6]
+        ylimitserr: [0., 0.35]
+        logy: true
+        logx: false
+        ratio:
+            logy: false
+            logx: false
+        errcomp:
+            logy: true
+            logx: false  

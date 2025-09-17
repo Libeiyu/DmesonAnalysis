@@ -1,0 +1,132 @@
+inputs:
+    dirname: null # leave null if not common for all input files
+    # filenames: [
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights_pass4/eff/eff_pt_weights_pass4_00.root,
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights_pass4/eff/eff_pt_weights_pass4_00.root,
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights/eff/eff_pt_weights_00.root,
+    #             /home/wuct/ALICE/local/Results/efficiency/k3050/cutvar_pt_weights/eff/eff_pt_weights_00.root
+    #             ]
+    # objectnames: [hEffPrompt, hEffFD, hEffPrompt, hEffFD] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+    # filenames: [
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/correlated_pass3/V2VsPt.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/correlated_pass4/V2VsPt.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/uncorrelated/V2VsPt.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/full/uncorrelated_pass4/V2VsPt.root,
+    # ]
+    # objectnames: [hv2Prompt, hv2Prompt, hv2Prompt, hv2Prompt] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+    # filenames: [
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/pre/rawyield/RawYields_D0_PbPb_0_Sigma.root,
+    #     /home/wuct/ALICE/local/Results/BDT/k3050/pre/sigma/sp/ry/raw_yieldssigma.root
+    # ]
+    # objectnames: [hRawYields, hRawYieldsSimFit] # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+    # filenames: [       
+    #     /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resosppass4W5Corr.root,
+    #     /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resosppass4W5Corr.root,
+    #     /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resosppass4W5Corr.root,
+    #     /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resosppass4W5Corr.root,
+    #     /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resospprivate.root,
+    #     /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resospprivate.root,
+    #     /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resospprivate.root,
+    #     /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resospprivate.root
+    # ]
+
+    # objectnames: [FT0c_FV0a_TPCtot/histo_reso, FT0c_FV0a_TPCtot/histo_reso_delta_cent, FT0a_FV0a_TPCtot/histo_reso, FT0a_FV0a_TPCtot/histo_reso_delta_cent,
+    #                 FT0c_FV0a_TPCtot/histo_reso, FT0c_FV0a_TPCtot/histo_reso_delta_cent, FT0a_FV0a_TPCtot/histo_reso, FT0a_FV0a_TPCtot/histo_reso_delta_cent] 
+    #                 # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+    filenames: [       
+        /data/meta/AnRes/resolution/NeNe/pass1/reso_sp_NeNe.root,
+        /data/meta/AnRes/resolution/NeNe/pass1/reso_sp_NeNe.root,
+        /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resospprivate.root,
+        /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resospprivate.root,
+    ]
+
+    objectnames: [FT0c_FV0a_TPCtot/histo_reso, FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+                    FT0c_FV0a_TPCtot/histo_reso, FT0c_FV0a_TPCtot/histo_reso_delta_cent] 
+                    # can be either histograms of graphs or a mix of them; they will be drawn in the current order
+
+#     filenames: [       
+#         /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resosppass4W5Corr.root,
+#         /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resosppass4W5Corr.root,
+#         /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resosppass4W5Corr.root,
+#         /home/wuct/ALICE/local/dev/d0_v2/test/T01/pass4Wpass5Corr/reso_resosppass4W5Corr.root,
+#     ]
+#     objectnames: [FT0c_FV0a_TPCtot/histo_reso, FT0c_FV0a_TPCtot/histo_reso_delta_cent,
+#                     FT0a_FV0a_TPCtot/histo_reso, FT0a_FV0a_TPCtot/histo_reso_delta_cent]
+output: 
+    filename: /data/meta/AnRes/resolution/NeNe/pass1/NeNe_PbPb # with path and w/o extension
+    extensions: [png, root] # possibilities: pdf, eps, png, root
+
+options:
+    ROOTobject: [TH1, TH1, TH1, TH1, TH1, TH1, TH1, TH1, TH1] # TH1 or TGraph: no need to specify TH1F, TH1D or TGraphErrors, TGraphAsymmErrors
+    scale: [1., 1., 1., 1., 1., 1., 1., 1., 1.]
+    lambdaParams: [1., 1., 1., 1., 1., 1., 1., 1., 1.] # counts -> (counts - 1) * lambda + 1
+    normalize: [false, false, false, false, false, false, false, false, false] # divide histogram by its area
+    colors: [kRed+1, kRed+1, kBlack, kBlack, kAzure+47, kOrange+7,kOrange+7 kBlack, kBlack, kRed+1, kRed+1, kAzure+4, kGreen+2, kOrange+7, kMagenta+1, kBlue, kCyan+3, kSpring-5]
+    markers: [kFullCircle, kOpenSquare, kFullCircle, kOpenSquare,kFullCircle, kFullCircle, kFullCircle, kFullCircle, kFullCircle, kFullCircle]
+    markersize: 1.5
+    linewidth: 3
+    fillstyle: [1,1,1,1, 2,2,2,2, 0,0,0,0, 0,0,0,0]
+    fillalpha: [1,1,1,1,1,1,1,1, 1,1,1,1, 1,1,1,1]
+    drawopt: [lp, lp, lp, lp, l, l, l, l, l]
+    
+    ratio: 
+        enable: true
+        uncertainties:
+            enable: false
+            corr: false
+        displayRMS: false
+        multiRatio: true
+        indexNumerator: [2, 3]
+        indexDenominator: [0, 1]
+
+    errcomp: # comparison of uncertainties
+        enable: false
+        relative: false
+    uncertainty: 
+        enable: false
+
+    legend:
+        avoid: false #set true to avoid the legend in the final plot
+        xlimits: [0.2, 0.9]
+        ylimits: [0.6, 0.9]
+        header: null
+        # titles: [prompt pass4, fd pass4, prompt pass3, fd pass3]
+        # titles: [corr. pass3, corr. pass4, uncorr. pass3, uncorr. pass4]
+        # titles: [raw yield, raw yield sim. fit]
+        # titles: [corr. strategy, uncorr. strategy, combined strategy]
+        # titles: [k30-50%, k30-40%, k40-50%, Prel. 3050%]
+        titles: ['NeNe pass1', 'NeNe pass1', 'PbPb pass4', 'PbPb pass4']
+        options: [lp, lp, lp, lp, l, lp, lp, lp, lp]
+        textsize: 0.035
+        ncolumns: 2
+
+    text:
+        x: [0.5, 0.8]
+        y: [0.8, 0.9]
+        text: ""
+        textsize: 0.03
+        textfont: 42
+        textalign: 12
+
+    canvas:
+        width: 2160
+        heigth: 1080
+        xaxistitle: 'Centrentrality (%)'
+        # yaxistitle: 'Efficiency (w. ptWeights)'
+        yaxistitle: 'Resolution'
+        # yaxistitle: 'Raw yield'
+        xlimits: [0., 100]
+        ylimits: [-0.2, 1.2]
+        ylimitsratio: [0., 3.8]
+        ylimitserr: [0., 0.35]
+        logy: false
+        logx: false
+        ratio:
+            logy: false
+            logx: false
+        errcomp:
+            logy: false
+            logx: false  

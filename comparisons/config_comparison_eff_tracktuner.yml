@@ -1,0 +1,301 @@
+inputs:
+  dirname: null
+  filenames:
+  - /home/wuct/ALICE/local/Results/BDT/2024/k3050/eff/cutvar_default_full/eff/eff_default_full_00.root
+  - /home/wuct/ALICE/local/Results/BDT/2024/k3050/eff/cutvar_default_full/eff/eff_default_full_00.root
+  - /home/wuct/ALICE/local/Results/BDT/2024/k3050/eff/cutvar_ptsmearing1p5_full/eff/eff_ptsmearing1p5_full_00.root
+  - /home/wuct/ALICE/local/Results/BDT/2024/k3050/eff/cutvar_ptsmearing1p5_full/eff/eff_ptsmearing1p5_full_00.root
+  - /home/wuct/ALICE/local/Results/BDT/2024/k3050/eff/cutvar_ptsmearing1p5_vsphi_full/eff/eff_ptsmearing1p5_vsphi_full_00.root
+  - /home/wuct/ALICE/local/Results/BDT/2024/k3050/eff/cutvar_ptsmearing1p5_vsphi_full/eff/eff_ptsmearing1p5_vsphi_full_00.root
+  objectnames:
+  - hEffPrompt
+  - hEffFD
+  - hEffPrompt
+  - hEffFD
+  - hEffPrompt
+  - hEffFD
+  - hEffPrompt
+  - hEffFD
+  - hEffPrompt
+  - hEffFD
+  - hEffPrompt
+  - hEffFD
+  - hEffPrompt
+  - hEffFD
+  - hEffPrompt
+  - hEffFD
+  - hEffPrompt
+  - hEffFD
+  - hEffPrompt
+  - hEffFD
+options:
+  ROOTobject:
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  - TH1
+  canvas:
+    errcomp:
+      logx: false
+      logy: false
+    heigth: 1080
+    logx: false
+    logy: true
+    ratio:
+      logx: false
+      logy: false
+    width: 2190
+    xaxistitle: '#it{p}_{T} (GeV/#it{c})'
+    xlimits:
+    - 0.4
+    - 26
+    yaxistitle: efficiency
+    ylimits:
+    - 1.0e-05
+    - 0.8
+    ylimitserr:
+    - 0.0
+    - 0.35
+    ylimitsratio:
+    - 0.0
+    - 2.1
+  colors:
+  - kBlack
+  - kBlack
+  - kRed+1
+  - kRed+1
+  - kAzure+4
+  - kAzure+4
+  - kGreen+2
+  - kGreen+2
+  - kOrange+7
+  - kOrange+7
+  - kMagenta+1
+  - kMagenta+1
+  - kBlue
+  - kBlue
+  - kCyan+3
+  - kCyan+3
+  - kSpring-5
+  drawopt:
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  - p
+  errcomp:
+    enable: false
+    relative: false
+  fillalpha:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  fillstyle:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  lambdaParams:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  legend:
+    avoid: false
+    header: null
+    ncolumns: 2
+    options:
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    - lp
+    textsize: 0.025
+    titles:
+    - default prompt
+    - default fd
+    - ptsmearing prompt
+    - ptsmearing fd
+    - ptsmearing vsphi prompt
+    - ptsmearing vsphi fd
+    - ptsmearing1p5 prompt
+    - ptsmearing1p5 fd
+    - ptsmearing1p5 vsphi prompt
+    - ptsmearing1p5 vsphi fd
+    - vsphi prompt
+    - vsphi fd
+    xlimits:
+    - 0.2
+    - 0.9
+    ylimits:
+    - 0.6
+    - 0.9
+  linewidth: 2
+  markers:
+  - kFullCircle
+  - kOpenSquare
+  - kFullCircle
+  - kOpenSquare
+  - kFullCircle
+  - kOpenSquare
+  - kFullCircle
+  - kOpenSquare
+  - kFullCircle
+  - kOpenSquare
+  - kFullCircle
+  - kOpenSquare
+  - kFullCircle
+  - kOpenSquare
+  - kFullSquare
+  - kFullSquare
+  - kFullSquare
+  - kFullSquare
+  - kFullSquare
+  markersize: 1
+  normalize:
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  - false
+  ratio:
+    displayRMS: false
+    enable: true
+    indexDenominator:
+    - 0
+    - 1
+    - 0
+    - 1
+    indexNumerator:
+    - 2
+    - 3
+    - 4
+    - 5
+    multiRatio: true
+    uncertainties:
+      corr: false
+      enable: false
+  scale:
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  text:
+    text: ''
+    textalign: 12
+    textfont: 42
+    textsize: 0.04
+    x:
+    - 0.6
+    - 0.8
+    y:
+    - 0.6
+    - 0.9
+  uncertainty:
+    enable: true
+output:
+  extensions:
+  - png
+  - root
+  filename: /home/wuct/ALICE/local/Results/BDT/2024/k3050/eff/pass4_eff_full.root
